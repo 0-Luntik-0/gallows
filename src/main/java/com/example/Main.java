@@ -1,4 +1,4 @@
-package com.zaurtregulov;
+package com.example;
 /**
  * При старте, приложение предлагает начать новую игру или выйти из приложения
  * При начале новой игры, случайным образом загадывается слово, и игрок начинает процесс по его отгадыванию
@@ -6,30 +6,36 @@ package com.zaurtregulov;
  * По завершении игры выводим результат (победа или поражение) и возвращаемся к состоянию #1 - предложение начать новую игру или выйти из приложения
  */
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        while (true) {
-            System.out.println("1. Начать новую игру");
-            System.out.println("2. Выйти из приложения");
+        try {
 
 
-            int choice = scanner.nextInt();
-            scanner.nextLine();
+            Scanner scanner = new Scanner(System.in);
+            while (true) {
+                System.out.println("1. Начать новую игру");
+                System.out.println("2. Выйти из приложения");
 
 
-            switch (choice) {
-                case 2 -> {
-                    System.out.println("Выход...");
-                    return;
-                }
-                case 1 -> {
-                    
+                int choice = scanner.nextInt();
+                scanner.nextLine();
 
+
+                switch (choice) {
+                    case 2 -> {
+                        System.out.println("Выход...");
+                        return;
+                    }
+                    case 1 -> {
+                        Game.gameMessages(WordProvider.word());
+                    }
                 }
             }
+        } catch (InputMismatchException e) {
+            System.out.println("Нужно выбрать один из предложенных варитантов");
         }
     }
 }
